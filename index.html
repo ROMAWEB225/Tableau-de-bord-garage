@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de Bord Garage</title>
+    <link rel="stylesheet" href="styles.css">
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Tableau de Bord Garage</h1>
+            <div class="date-filter">
+                <label for="date">Afficher pour le :</label>
+                <input type="date" id="date" value="">
+            </div>
+        </header>
+        
+        <div class="stats-cards">
+            <div class="stat-card">
+                <h3>Véhicules aujourd'hui</h3>
+                <div class="value" id="today-vehicles">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Vidanges aujourd'hui</h3>
+                <div class="value" id="today-oil-changes">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>En cours</h3>
+                <div class="value" id="in-progress">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Terminés</h3>
+                <div class="value" id="completed">0</div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <h2>Véhicules du jour</h2>
+                <button class="btn btn-primary" id="add-vehicle-btn">
+                    <i class="fas fa-plus"></i> Nouveau véhicule
+                </button>
+            </div>
+            <div class="card-body">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Immatriculation</th>
+                            <th>Modèle</th>
+                            <th>Intervention</th>
+                            <th>Mécanicien(s)</th>
+                            <th>Statut</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="vehicles-table-body">
+                        <!-- Les données seront ajoutées dynamiquement par JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <h2>Récapitulatif des vidanges</h2>
+            </div>
+            <div class="card-body">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Mécanicien</th>
+                            <th>Nombre de vidanges</th>
+                            <th>Véhicules</th>
+                        </tr>
+                    </thead>
+                    <tbody id="oil-changes-summary">
+                        <!-- Les données seront ajoutées dynamiquement par JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal pour ajouter un véhicule -->
+    <div class="modal" id="vehicle-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Ajouter un véhicule</h2>
+                <span class="close" id="close-modal">&times;</span>
+            </div>
+            <form id="vehicle-form">
+                <div class="form-group">
+                    <label for="immatriculation">Immatriculation</label>
+                    <input type="text" id="immatriculation" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="modele">Modèle</label>
+                    <input type="text" id="modele" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="intervention">Type d'intervention</label>
+                    <div class="intervention-options">
+                        <div class="intervention-option" data-value="Vidange">Vidange</div>
+                        <div class="intervention-option" data-value="Freinage">Freinage</div>
+                        <div class="intervention-option" data-value="Diagnostic">Diagnostic</div>
+                        <div class="intervention-option" data-value="Révision">Révision</div>
+                        <div class="intervention-option" data-value="Carrosserie">Carrosserie</div>
+                    </div>
+                    <input type="text" id="intervention" class="form-control" required placeholder="Ou saisissez une intervention personnalisée">
+                </div>
+                <div class="form-group">
+                    <label for="mecanicien-select">Mécanicien(s)</label>
+                    <select id="mecanicien-select" class="form-control">
+                        <option value="">Sélectionner un mécanicien</option>
+                        <option value="Mohamed">Mohamed</option>
+                        <option value="Karim">Karim</option>
+                        <option value="Jean">Jean</option>
+                        <option value="Paul">Paul</option>
+                    </select>
+                    <button type="button" class="btn btn-sm btn-primary" id="add-mechanic-btn" style="margin-top: 10px;">
+                        <i class="fas fa-plus"></i> Ajouter ce mécanicien
+                    </button>
+                    
+                    <div class="selected-mechanics">
+                        <h4>Mécaniciens assignés:</h4>
+                        <div id="selected-mechanics-list"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="statut">Statut</label>
+                    <select id="statut" class="form-control" required>
+                        <option value="En attente">En attente</option>
+                        <option value="En cours">En cours</option>
+                        <option value="Terminé">Terminé</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </form>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
